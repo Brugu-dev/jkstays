@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JK Stays — Forest Homestay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-dark: #1a3a2a;
+    --green-mid: #2d6a4f;
+    --green-light: #52b788;
+    --gold: #c9a84c;
+    --cream: #fdf8f0;
+    --brown: #7b4a2a;
+    --text: #1c1c1c;
+    --text-light: #555;
+    --white: #ffffff;
+    --section-pad: 80px 5%;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 5%;
+    background: rgba(26, 58, 42, 0.95);
+    backdrop-filter: blur(8px);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 1.5rem;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--green-dark) !important;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-weight: 600 !important;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, rgba(10,30,18,0.55) 0%, rgba(10,30,18,0.3) 60%, rgba(253,248,240,1) 100%),
+                url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1600&q=80') center/cover no-repeat;
+    display: flex; align-items: center;
+    padding: 120px 5% 60px;
+  }
+  .hero-content { max-width: 640px; }
+  .hero-eyebrow {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--green-dark);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .hero p {
+    color: rgba(255,255,255,0.82);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 36px;
+    max-width: 500px;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--green-dark);
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #e0bb5e; transform: translateY(-1px); }
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.7);
+    color: var(--white);
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--green-dark);
+    display: flex; justify-content: center; align-items: center;
+    gap: 48px; flex-wrap: wrap;
+    padding: 20px 5%;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 10px;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.85rem;
+  }
+  .trust-item svg { color: var(--gold); }
+
+  /* SECTION COMMON */
+  section { padding: var(--section-pad); }
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    color: var(--green-dark);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    color: var(--text-light);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 48px;
+  }
+
+  /* ABOUT */
+  .about { background: var(--cream); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .about-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .about-img {
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+  }
+  .about-img img { width: 100%; height: 100%; object-fit: cover; }
+  .about-img.tall { grid-row: span 2; aspect-ratio: auto; }
+  .about-text .section-sub { margin-bottom: 28px; }
+  .amenities-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+    margin-top: 8px;
+  }
+  .amenity-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .amenity-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green-light);
+    flex-shrink: 0;
+  }
+
+  /* ROOMS / PRICING */
+  .pricing { background: var(--green-dark); }
+  .pricing .section-label { color: var(--gold); }
+  .pricing .section-title { color: var(--white); }
+  .pricing .section-sub { color: rgba(255,255,255,0.65); }
+  .pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .pricing-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 28px 24px;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+  }
+  .pricing-card:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); }
+  .pricing-card.featured {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+  .card-badge {
+    position: absolute;
+    top: -12px; left: 24px;
+    background: var(--gold);
+    color: var(--green-dark);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .card-icon {
+    width: 44px; height: 44px;
+    border-radius: 8px;
+    background: rgba(201,168,76,0.15);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+    font-size: 1.4rem;
+  }
+  .card-type {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .card-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .card-price span {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+  }
+  .card-note {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 20px;
+    margin-top: 4px;
+  }
+  .card-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 20px 0;
+  }
+  .card-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .card-features li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.72);
+  }
+  .feat-check {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--green-light);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.6rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* GALLERY */
+  .gallery { background: var(--cream); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 240px 240px 240px;
+    gap: 12px;
+  }
+  .gallery-item {
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.4s;
+  }
+  .gallery-item:hover img { transform: scale(1.04); }
+  .gallery-item.span2 { grid-column: span 2; }
+  .gallery-item.tall { grid-row: span 2; }
+
+  /* LOCATION */
+  .location { background: #f4f0e8; }
+  .location-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .location-map {
+    border-radius: 12px;
+    overflow: hidden;
+    height: 380px;
+    border: 2px solid var(--green-mid);
+    background: #e8e4dc;
+  }
+  .location-map iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .location-info .section-sub { margin-bottom: 32px; }
+  .location-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .loc-icon {
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    background: var(--green-mid);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: var(--white);
+    font-size: 1.1rem;
+  }
+  .loc-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 3px;
+  }
+  .loc-value {
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+
+  /* CONTACT */
+  .contact { background: var(--green-dark); }
+  .contact .section-label { color: var(--gold); }
+  .contact .section-title { color: var(--white); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .contact-left .section-sub { color: rgba(255,255,255,0.6); margin-bottom: 36px; }
+  .contact-detail {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 20px;
+  }
+  .c-icon {
+    width: 44px; height: 44px;
+    border-radius: 8px;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .c-info .c-label { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .c-info .c-val { font-size: 1rem; color: var(--white); font-weight: 500; }
+  .c-info a { color: var(--gold); text-decoration: none; }
+  .contact-form {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 32px;
+  }
+  .form-row { margin-bottom: 18px; }
+  .form-row label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .form-row input, .form-row select, .form-row textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 12px 14px;
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-row input::placeholder, .form-row textarea::placeholder { color: rgba(255,255,255,0.3); }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus { border-color: var(--gold); }
+  .form-row select option { background: var(--green-dark); }
+  .form-row textarea { resize: vertical; min-height: 100px; }
+  .form-submit {
+    width: 100%;
+    background: var(--gold);
+    color: var(--green-dark);
+    border: none;
+    border-radius: 6px;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: background 0.2s;
+    margin-top: 6px;
+  }
+  .form-submit:hover { background: #e0bb5e; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  /* FOOTER */
+  footer {
+    background: #0d2018;
+    padding: 30px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 1.3rem;
+  }
+  footer p {
+    color: rgba(255,255,255,0.35);
+    font-size: 0.82rem;
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { color: rgba(255,255,255,0.4); font-size: 0.82rem; text-decoration: none; }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* WHATSAPP FLOAT */
+  .wa-float {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    z-index: 200;
+    background: #25d366;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+  .wa-float:hover { transform: scale(1.1); }
+  .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+  /* HAMBURGER */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
+
+  /* MOBILE NAV OVERLAY */
+  .mobile-nav {
+    display: none;
+    position: fixed; inset: 0; z-index: 99;
+    background: var(--green-dark);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-family: 'Playfair Display', serif;
+  }
+  .mobile-nav-close {
+    position: absolute; top: 20px; right: 5%;
+    background: none; border: none; color: var(--white);
+    font-size: 2rem; cursor: pointer;
+  }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .about-grid, .location-grid, .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .gallery-item.span2 { grid-column: span 1; }
+    .gallery-item.tall { grid-row: span 1; }
+    .trust-bar { gap: 20px; }
+    footer { flex-direction: column; text-align: center; }
+    .form-grid { grid-template-columns: 1fr; }
+    .amenities-list { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+    .pricing-cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">JK Stays</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
+  </ul>
+  <button class="hamburger" onclick="document.querySelector('.mobile-nav').classList.add('open')" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <button class="mobile-nav-close" onclick="document.querySelector('.mobile-nav').classList.remove('open')">✕</button>
+  <a href="#about" onclick="document.querySelector('.mobile-nav').classList.remove('open')">About</a>
+  <a href="#pricing" onclick="document.querySelector('.mobile-nav').classList.remove('open')">Pricing</a>
+  <a href="#gallery" onclick="document.querySelector('.mobile-nav').classList.remove('open')">Gallery</a>
+  <a href="#location" onclick="document.querySelector('.mobile-nav').classList.remove('open')">Location</a>
+  <a href="#contact" onclick="document.querySelector('.mobile-nav').classList.remove('open')">Book Now</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-eyebrow">Forest Homestay</span>
+    <h1>Wake Up Inside<br>a Green World</h1>
+    <p>Tucked in an areca nut and coffee plantation  with mountain views JK Stays is where families, couples, and groups find real rest away from the city.</p>
+    <div class="hero-btns">
+      <a href="#pricing" class="btn-primary">See Rooms & Prices</a>
+      <a href="#contact" class="btn-outline">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    Power Backup
+  </div>
+  <div class="trust-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 0c0 4-4 7-4 10a4 4 0 0 0 8 0c0-3-4-6-4-10"/></svg>
+    Hot Water
+  </div>
+  <div class="trust-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    Breakfast & Dinner
+  </div>
+  <div class="trust-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+    Veg & Non-Veg
+  </div>
+  <div class="trust-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    Groups Welcome
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-images">
+      <div class="about-img tall">
+        <img src="images/about/Homestay%20exterior%20surrounded%20by%20forest.jpeg" alt="Homestay exterior surrounded by forest">
+      </div>
+      <div class="about-img">
+        <img src="images/about/Cozy%20room%20interior.jpeg" alt="Cozy room interior">
+      </div>
+      <div class="about-img">
+        <img src="images/about/Evening%20outdoor%20seating.jpeg" alt="Evening outdoor seating">
+      </div>
+    </div>
+    <div class="about-text">
+      <p class="section-label">About JK Stays</p>
+      <h2 class="section-title">Your Private Escape in the Western Ghats</h2>
+      <p class="section-sub">Set amidst a lush areca nut and coffee plantation, JK Stays offers an authentic homestay experience with traditional Coorg hospitality. Whether you're here for a quiet weekend or a group celebration, the forest is your backyard.</p>
+      <p class="section-label" style="margin-bottom:12px">What's included</p>
+      <div class="amenities-list">
+        <div class="amenity-item"><span class="amenity-dot"></span>Power backup 24/7</div>
+        <div class="amenity-item"><span class="amenity-dot"></span>Hot water supply</div>
+        <div class="amenity-item"><span class="amenity-dot"></span>Breakfast & dinner</div>
+        <div class="amenity-item"><span class="amenity-dot"></span>Veg & non-veg meals</div>
+        <div class="amenity-item"><span class="amenity-dot"></span>Outdoor swing area</div>
+        <div class="amenity-item"><span class="amenity-dot"></span>Treehouse-style room</div>
+        <div class="amenity-item"><span class="amenity-dot"></span>Night LED garden</div>
+        <div class="amenity-item"><span class="amenity-dot"></span>Parking on premises</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <p class="section-label">Rooms & Pricing</p>
+  <h2 class="section-title" style="color:var(--white)">Pick Your Stay</h2>
+  <p class="section-sub">All rooms include power backup and hot water. Meals are optional for all packages — just let us know when you book.</p>
+
+  <div class="pricing-cards">
+    <!-- Couple -->
+    <div class="pricing-card">
+      <div class="card-icon">💑</div>
+      <div class="card-type">For 2</div>
+      <div class="card-name">Couple Room</div>
+      <div class="card-price">₹5,000–6,000 <span>/ stay</span></div>
+      <div class="card-note">Includes breakfast & dinner</div>
+      <div class="card-divider"></div>
+      <ul class="card-features">
+        <li><span class="feat-check">✓</span>Private double room</li>
+        <li><span class="feat-check">✓</span>Breakfast & dinner included</li>
+        <li><span class="feat-check">✓</span>Hot water & power backup</li>
+        <li><span class="feat-check">✓</span>Garden & swing access</li>
+      </ul>
+    </div>
+
+    <!-- Family -->
+    <div class="pricing-card featured">
+      <div class="card-badge">Most Popular</div>
+      <div class="card-icon">👨‍👩‍👧‍👦</div>
+      <div class="card-type">For 4</div>
+      <div class="card-name">Family Room</div>
+      <div class="card-price">₹8,000–10,000 <span>/ stay</span></div>
+      <div class="card-note">Includes breakfast & dinner</div>
+      <div class="card-divider"></div>
+      <ul class="card-features">
+        <li><span class="feat-check">✓</span>Spacious family room</li>
+        <li><span class="feat-check">✓</span>Breakfast & dinner for all</li>
+        <li><span class="feat-check">✓</span>Hot water & power backup</li>
+        <li><span class="feat-check">✓</span>Full estate access</li>
+      </ul>
+    </div>
+
+    <!-- Group -->
+    <div class="pricing-card">
+      <div class="card-icon">🎉</div>
+      <div class="card-type">Groups & Bachelors</div>
+      <div class="card-name">Group Stay</div>
+      <div class="card-price">₹2,500 <span>/ person</span></div>
+      <div class="card-note">With food • Without food available</div>
+      <div class="card-divider"></div>
+      <ul class="card-features">
+        <li><span class="feat-check">✓</span>Multiple rooms available</li>
+        <li><span class="feat-check">✓</span>Group meals on request</li>
+        <li><span class="feat-check">✓</span>Bonfire & night seating</li>
+        <li><span class="feat-check">✓</span>Customisable for events</li>
+      </ul>
+    </div>
+  </div>
+
+  <p style="margin-top:28px; color:rgba(255,255,255,0.4); font-size:0.82rem; text-align:center;">
+    Prices may vary by season. Without-food packages available on request. Contact us for exact quotes.
+  </p>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <p class="section-label">Gallery</p>
+  <h2 class="section-title">A Glimpse of the Estate</h2>
+  <p class="section-sub">From plantation walks at dawn to lit-up garden evenings, every corner of JK Stays has a story.</p>
+  <div class="gallery-grid">
+    <div class="gallery-item tall">
+      <img src="images/gallery/Forest%20view%20from%20the%20estate.jpeg" alt="Forest view from the estate">
+    </div>
+    <div class="gallery-item span2">
+      <img src="images/gallery/Outdoor%20area%20with%20thatched%20roof.jpeg" alt="Outdoor area with thatched roof">
+    </div>
+    <div class="gallery-item">
+      <img src="images/gallery/Cozy%20room%20interior1.jpeg" alt="Cozy room interior">
+    </div>
+    <div class="gallery-item">
+      <img src="images/gallery/Evening%20outdoor%20seating%20under%20lights.jpeg" alt="Evening outdoor seating under lights">
+    </div>
+    <div class="gallery-item span2">
+      <img src="images/gallery/Interior2.jpeg" alt="Interior view">
+    </div>
+    <div class="gallery-item">
+      <img src="images/gallery/Interior3.jpeg" alt="Interior detail">
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location" id="location">
+  <div class="location-grid">
+    <div class="location-map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15718.8!2d75.802546!3d12.35475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba5abd9810e2bf3%3A0xa9b3b91357e6ab76!2sKumerikadu%20estate%20stay!5e0!3m2!1sen!2sin!4v1734393600!5m2!1sen!2sin"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Kumerikadu Estate Stay — Google Maps">
+      </iframe>
+    </div>
+    <div class="location-info">
+      <p class="section-label">Find Us</p>
+      <h2 class="section-title">How to Get Here</h2>
+      <p class="section-sub">Located in the lush green Western Ghats corridor. Close to nature, far from the noise.</p>
+      <div class="location-detail">
+        <div class="loc-icon">📍</div>
+        <div>
+          <div class="loc-label">Address</div>
+          <div class="loc-value">Kumerikadu Estate Stay, Maragodu, Karnataka 571252</div>
+        </div>
+      </div>
+      <div class="location-detail">
+        <div class="loc-icon">🚗</div>
+        <div>
+          <div class="loc-label">From Bengaluru</div>
+          <div class="loc-value">~4 hours by car via NH75</div>
+        </div>
+      </div>
+      <div class="location-detail">
+        <div class="loc-icon">🛤️</div>
+        <div>
+          <div class="loc-label">Nearest Town</div>
+          <div class="loc-value">Contact us for precise directions</div>
+        </div>
+      </div>
+      <a href="https://maps.app.goo.gl/73XNLGSCCDqLKj9m7?g_st=aw" target="_blank" rel="noopener" class="btn-primary" style="display:inline-block; margin-top:8px; background:var(--green-mid);">Open in Google Maps →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-grid">
+    <div class="contact-left">
+      <p class="section-label">Book Your Stay</p>
+      <h2 class="section-title" style="color:var(--white)">Get in Touch</h2>
+      <p class="section-sub">Drop us a message or call directly. We'll confirm availability and share arrival details within a few hours.</p>
+
+      <div class="contact-detail">
+        <div class="c-icon">📞</div>
+        <div class="c-info">
+          <div class="c-label">Phone / WhatsApp</div>
+          <div class="c-val"><a href="tel:+917676823860">+91 76768 23860</a></div>
+          <div class="c-val"><a href="tel:+919606199363">+91 96061 99363</a></div>
+        </div>
+      </div>
+
+      <div class="contact-detail" style="margin-top:4px">
+        <div class="c-icon">✉️</div>
+        <div class="c-info">
+          <div class="c-label">Email</div>
+          <div class="c-val"><a href="mailto:jeevan.kanadka456@gmail.com">jeevan.kanadka456@gmail.com</a></div>
+        </div>
+      </div>
+
+      <div style="margin-top:32px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="https://wa.me/917676823860?text=Hi%2C%20I%27d%20like%20to%20book%20a%20stay%20at%20JK%20Stays" target="_blank" rel="noopener" class="btn-primary">WhatsApp Us →</a>
+        <a href="tel:+917676823860" class="btn-outline" style="border-color:rgba(255,255,255,0.3)">Call Now</a>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-grid">
+          <div class="form-row">
+            <label>Your Name</label>
+            <input type="text" name="name" placeholder="Rahul Sharma" required autocomplete="name">
+          </div>
+          <div class="form-row">
+            <label>Phone</label>
+            <input type="tel" name="phone" placeholder="+91 98xxx xxxxx" required autocomplete="tel">
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Room Type</label>
+          <select name="room" required>
+            <option value="" disabled selected>Select a room</option>
+            <option>Couple Room (₹5,000–6,000)</option>
+            <option>Family Room – 4 persons (₹8,000–10,000)</option>
+            <option>Group / Bachelor Stay (₹2,500/person)</option>
+          </select>
+        </div>
+        <div class="form-grid">
+          <div class="form-row">
+            <label>Check-in Date</label>
+            <input type="date" name="checkin" required>
+          </div>
+          <div class="form-row">
+            <label>Check-out Date</label>
+            <input type="date" name="checkout" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Message (optional)</label>
+          <textarea name="message" placeholder="Tell us about your group, dietary needs, or anything else…"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Booking Request →</button>
+      </form>
+      <p id="form-msg" style="display:none; margin-top:14px; text-align:center; color:var(--green-light); font-size:0.9rem;"></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">JK Stays</div>
+  <p>© 2025 JK Stays. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a class="wa-float" href="https://wa.me/917676823860?text=Hi%2C%20I%27d%20like%20to%20book%20a%20stay%20at%20JK%20Stays" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+  </svg>
+</a>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  var f = e.target;
+  function val(name) {
+    var el = f.elements.namedItem(name);
+    return el && el.value ? String(el.value).trim() : '';
+  }
+  var name = val('name');
+  var phone = val('phone');
+  var room = val('room');
+  var checkin = val('checkin');
+  var checkout = val('checkout');
+  var message = val('message');
+  if (message.length > 1500) message = message.slice(0, 1500) + '\n…(message shortened for email link)';
+
+  var body = [
+    'Booking request from the JK Stays website',
+    '',
+    'Name: ' + name,
+    'Phone: ' + phone,
+    'Room: ' + room,
+    'Check-in: ' + checkin,
+    'Check-out: ' + checkout,
+    '',
+    'Message:',
+    message || '(none)'
+  ].join('\n');
+
+  var subject = 'JK Stays booking — ' + name;
+  var to = 'jeevan.kanadka456@gmail.com';
+  var mailto = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+  if (mailto.length > 2000) {
+    body = body.slice(0, 1200) + '\n…(use phone or WhatsApp if details were cut off)';
+    mailto = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
+
+  window.location.href = mailto;
+
+  var msg = document.getElementById('form-msg');
+  msg.style.display = 'block';
+  msg.textContent = 'Your email app should open with a draft to ' + to + '. Press Send there to deliver the request.';
+}
+</script>
+</body>
+</html>
